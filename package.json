@@ -1,0 +1,29 @@
+{
+  "name": "commentedit",
+  "version": "1.0.0",
+  "description": "Comment on the latest news!",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pablackhawk/commentedit.git"
+  },
+  "keywords": ["MongoDB", "node.js", "express"],
+  "author": "Laurentius Tirtarahardja",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pablackhawk/commentedit/issues"
+  },
+  "homepage": "https://github.com/pablackhawk/commentedit#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "cheerio": "^1.0.0-rc.2",
+    "express": "^4.16.2",
+    "express-handlebars": "^3.0.0",
+    "mongoose": "^5.0.5",
+    "request": "^2.83.0"
+  }
+}
