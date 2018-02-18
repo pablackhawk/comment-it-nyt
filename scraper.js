@@ -50,7 +50,8 @@ app.get('/scrape', (req, res) => {
             title: title,
             link: link,
           },
-          function(err, inserted) {
+          { unique: true },
+          (err, inserted) => {
             if (err) throw err;
             console.log(inserted);
           }
