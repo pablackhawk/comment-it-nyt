@@ -17,7 +17,7 @@ router.get('/articles', function(req, res) {
   Article.find()
     .sort({ id: -1 })
     .populate('comments')
-    .exec((err, doc) => {
+    .exec(function(err, doc) {
       if (err) throw err;
       let hbsObject = { articles: doc };
       res.render('index', hbsObject);
@@ -34,7 +34,7 @@ router.get('/scrape', function(req, res) {
   request('https:www.nhl.com', function(err, res, html) {
     const $ = cheerio.load(html);
     let titlesArray = [];
-    $('h4.headline-link').each((index, element) => {
+    $('h4.headline-link').each(function(index, element) {
       let result = [];
       result.title =
         $(element)
@@ -49,10 +49,10 @@ router.get('/scrape', function(req, res) {
       if (result.title !== '' && result.lik !== '') {
         if (titlesArray.indexOf(result.title) === -1) {
           titlesArray.push(result.title);
-          Article.count({ title: result.title }, (err, test) => {
+          Article.count({ title: result.title }, function(err, test) {
             if (test === 0) {
               let entry = new Article(result);
-              entry.save((err, doc) => {
+              entry.save(function(err, doc) {
                 if (err) throw err;
                 console.log(doc);
               });
@@ -82,13 +82,13 @@ router.post('/add/comment/:id', function(req, res) {
   let entry = new Comment(result);
 
   // Saves comment to database
-  entry.save((err, doc) => {
+  entry.save(function(err, doc) {
     if (err) throw err;
     Article.findOneAndUpdate(
       { _id: articleID },
       { $push: { comments: doc._id } },
       { new: true }
-    ).exec((err, doc) => {
+    ).exec(function(err, doc) {
       if (err) throw err;
       res.sendStatus(200);
     });
@@ -98,7 +98,7 @@ router.post('/add/comment/:id', function(req, res) {
 // Delete a comment
 router.post('/remove/comment/:id', function(req, res) {
   let commentID = req.params.id;
-  Comment.findByIdAndRemove(commentID, (err, todo) => {
+  Comment.findByIdAndRemove(commentID, function(err, todo) {
     if (err) throw err;
     res.sendStatus(200);
   });
