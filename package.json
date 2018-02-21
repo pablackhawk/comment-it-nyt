@@ -2,11 +2,10 @@
   "name": "commentedit",
   "version": "1.0.0",
   "description": "Comment on the latest news!",
-  "main": "scraper.js",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon scraper.js",
-    "dev": "nodemon scraper.js"
+    "start": "nodemon index.js"
   },
   "repository": {
     "type": "git",

@@ -70,11 +70,12 @@ app.get('/', function(req, res) {
     };
     console.log(hbsObject);
     res.render('home', hbsObject);
-  });
+  }).sort({ _id: -1 });
 });
 
 app.get('/saved', function(req, res) {
   Article.find({ saved: true })
+    .sort({ _id: -1 })
     .populate('notes')
     .exec(function(error, articles) {
       var hbsObject = {
