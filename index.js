@@ -126,7 +126,10 @@ app.get('/scrape', function(req, res) {
         }
       });
     });
-    res.send('Scrape Complete');
+    res.send('Scrape Complete.');
+    function redirect() {
+      window.location = '/';
+    }
   });
   // Tell the browser that we finished scraping the text
 });
