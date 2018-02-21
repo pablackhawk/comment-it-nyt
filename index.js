@@ -20,7 +20,7 @@ app.set('view engine', 'handlebars');
 // Dtabase configuration
 mongoose.connect('mongodb://localhost/scraper');
 
-const db = mongoose.connection;
+const db = require('./models');
 
 // Logs Mongoose errors
 db.on('error', function(err) {
@@ -30,9 +30,6 @@ db.on('error', function(err) {
 db.once('open', function() {
   console.log('Connection Successful.');
 });
-
-let Comment = require('./models/Comment.js');
-let Article = require('./models/Article.js');
 
 // Import Routes and controller
 const router = require('./controllers/controller.js');

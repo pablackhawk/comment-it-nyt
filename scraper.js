@@ -7,7 +7,7 @@ const app = express();
 const databaseUrl = 'scraper';
 const collection = ['scrapeData'];
 
-const db = require('./DB/connection.js');
+const db = mongojs(databaseUrl, collection);
 const PORT = process.env.port || 3007;
 
 // Routes
