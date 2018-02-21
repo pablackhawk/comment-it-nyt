@@ -46,7 +46,9 @@ app.engine(
 app.set('view engine', 'handlebars');
 
 // Database configuration with mongoose
-mongoose.connect('mongodb://h1S@co>@ds143738.mlab.com:43738/heroku_tbvb54gk');
+mongoose.connect(
+  'mongodb://heroku_tbvb54gk:ve9a067bmi5ge7gudkim7hfqms@ds143738.mlab.com:43738/heroku_tbvb54gk'
+);
 // mongoose.connect('mongodb://localhost/scraper');
 const db = mongoose.connection;
 
