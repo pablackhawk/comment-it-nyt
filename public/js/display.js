@@ -1,69 +1,54 @@
-// Hides articles div at first
-$('#articles').hide();
+$(document).ready(function() {
+  // Nav Bar Mobile Slider
+  $('.button-collapse').sideNav();
 
-// Grab articles on "Scrape" click
-$('#scrape').on('click', () => {
-  $('#articles').show();
-  $.getJSON('/articles', data => {
-    for (let i = 0; i < data.length; i++) {
-      $('#articles').append(
-        "<div class='newArticle'><p data-id='" +
-          data[i]._id +
-          "'><h3><a class='link' target='_blank' href='" +
-          data[i].link +
-          "'>" +
-          data[i].title +
-          "</a></h3><button type='button' id='favorite' data-id='" +
-          data[i]._id +
-          "' class='btn btn-default'>Add to Favorites</button></p></div>"
-      );
-    }
+  // Click Listener for FORM SUBMISSION to ADD a comment
+  $('.add-comment-button').on('click', function() {
+    // http://stackoverflow.com/questions/1960240/jquery-ajax-submit-form
+    // http://stackoverflow.com/questions/17097947/jquery-using-a-variable-as-a-selector
+
+    // Get _id of comment to be deleted
+    let articleId = $(this).data('id');
+
+    // URL root (so it works in eith Local Host for Heroku)
+    let baseURL = window.location.origin;
+
+    // Get Form Data by Id
+    let frmName = 'form-add-' + articleId;
+    let frm = $('#' + frmName);
+
+    // AJAX Call to delete Comment
+    $.ajax({
+      url: baseURL + '/add/comment/' + articleId,
+      type: 'POST',
+      data: frm.serialize(),
+    }).done(function() {
+      // Refresh the Window after the call is done
+      location.reload();
+    });
+
+    // Prevent Default
+    return false;
   });
-});
-$('#articles').on('click', '#addNote', function() {
-  console.log('Clicked!');
-});
 
-// When p tag is clicked
-$(this).on('click', () => {
-  $('#notes').empty();
-  let thisID = $(this).attr('data-id');
+  // Click Listener for FORM SUBMISSION to DELETE a comment
+  $('.delete-comment-button').on('click', function() {
+    // Get _id of comment to be deleted
+    let commentId = $(this).data('id');
 
-  // AJAX call
-  $.ajax({
-    method: 'GET',
-    url: '/articles/' + thisID,
-  }).done(data => {
-    console.log(data);
-    $('#notes').append('<h2>' + data.title + '</h2>');
-    $('#notes').append("<input id='titleinput' name='title' >");
-    $('#notes').append("<textarea id='bodyinput' name='body'></textarea>");
-    $('#notes').append(
-      "<button data-id='" + data._id + "' id='savenote'>Save Note</button>"
-    );
+    // URL root (so it works in eith Local Host for Heroku)
+    let baseURL = window.location.origin;
 
-    // Checks for a note
-    if (data.note) {
-      $('#titleinput').val(data.note.title);
-      $('#bodyinput').val(data.note.body);
-    }
+    // AJAX Call to delete Comment
+    $.ajax({
+      url: baseURL + '/remove/comment/' + commentId,
+      type: 'POST',
+    }).done(function() {
+      // Refresh the Window after the call is done
+      location.reload();
+    });
+
+    // Prevent Default
+    return false;
   });
-});
-
-// When clicking Save button
-$(document).on('click', '#savenote', () => {
-  let thisID = $(this).attr('data-id');
-  $.ajax({
-    method: 'POST',
-    url: '/articles/' + thisID,
-    data: {
-      title: $('#titleinput').val(),
-      body: $('#bodyinput').val(),
-    },
-  }).done(data => {
-    console.log(data);
-    $('#notes').empty();
-  });
-  $('#titleinput').val('');
-  $('#bodyinput').val('');
 });

@@ -7,32 +7,35 @@ const app = express();
 const databaseUrl = 'scraper';
 const collection = ['scrapeData'];
 
-const db = mongojs(databaseUrl, collection);
+const db = require('./DB/connection.js');
 const PORT = process.env.port || 3007;
 
-db.on('error', err => {
+// Routes
+require('./routes/html-routes.js')(app);
+
+db.on('error', function(err) {
   if (err) throw err;
 });
 
-app.get('/', (req, res) => {
+app.get('/', function(req, res) {
   res.send('Hello Hockey Fans!');
 });
 
-app.get('/all', (req, res) => {
+app.get('/all', function(req, res) {
   db.scrapeData.find({}, (err, data) => {
     if (err) throw err;
     res.json(data);
   });
 });
 
-app.get('/scrape', (req, res) => {
+app.get('/scrape', function(req, res) {
   console.log(
     '\n******************************************\n' +
       'Grabbing every article headline and link\n' +
       'from the NHL website:' +
       '\n******************************************\n'
   );
-  request('https://www.nhl.com', (err, res, html) => {
+  request('https://www.nhl.com', function(err, res, html) {
     // Loads HTML body into cheerio
     const $ = cheerio.load(html);
     // Array for scraped data
