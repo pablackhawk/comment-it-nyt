@@ -12,6 +12,10 @@ a {
   color: rgb(171, 189, 16);
 }
 
+.nav-item {
+  margin: auto;
+}
+
 .jumbotron {
   background-image: url('/assets/img/banner.jpg');
   object-fit: scale-down;
@@ -37,7 +41,7 @@ a {
 }
 
 #scrape {
-  margin: 8px 0px;
+  margin: 8px 5px;
 }
 
 .panel-default {
