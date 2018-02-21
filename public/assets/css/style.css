@@ -1,0 +1,48 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-image: url('/assets/img/newspaper.jpg');
+  background-attachment: fixed;
+  padding-top: 70px;
+}
+
+a {
+  color: rgb(171, 189, 16);
+}
+
+.jumbotron {
+  background-image: url('/assets/img/banner.jpg');
+  object-fit: scale-down;
+  background-position: center;
+  color: rgb(20, 20, 142);
+}
+
+.transparency-layer {
+  height: 100%;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  background: rgba(128, 128, 128, 0.75);
+}
+
+.deleteNote {
+  display: inline-block;
+}
+
+.previousNotes {
+  display: inline-block;
+  width: 90%;
+}
+
+#scrape {
+  margin: 8px 0px;
+}
+
+.panel-default {
+  background: rgba(128, 128, 128, 0.8);
+  color: #fff;
+  padding: 1rem;
+  margin: 5px 0;
+}

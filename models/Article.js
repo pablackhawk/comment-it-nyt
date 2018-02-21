@@ -1,33 +1,37 @@
-// Dependencies
-const moment = require('moment');
+// Require mongoose
 const mongoose = require('mongoose');
-
+let Note = require('./Note');
 // Create Schema class
 const Schema = mongoose.Schema;
 
+// Create article schema
 let ArticleSchema = new Schema({
   title: {
     type: String,
-    required: [true, 'Article needed'],
-    unique: true,
+    required: true,
+  },
+  summary: {
+    type: String,
+    required: true,
   },
   link: {
     type: String,
     required: true,
   },
-  updated: {
-    type: String,
-    default: moment().format('MMM Do YYY, h:mm A'),
+  saved: {
+    type: Boolean,
+    default: false,
   },
-  // Creates relation with Comment model
-  comments: [
+  notes: [
     {
-      type: Schema.Types.ObjectID,
-      ref: 'Comment',
+      type: Schema.Types.ObjectId,
+      ref: 'Note',
     },
   ],
 });
 
-// Creates the Article model
-let Article = mongoose.model('Article', ArticleSchema);
+// Create the Article model with the ArticleSchema
+var Article = mongoose.model('Article', ArticleSchema);
+
+// Export the model
 module.exports = Article;
