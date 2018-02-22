@@ -3,8 +3,13 @@
 <div class="container">
 
   <div class="col-md-12 jumbotron">
-    <div class="text-center">
-      <h1> Saved Articles</h1>
+    <div class="transparency-layer">
+      <div class="text-center">
+        <h1> Saved Articles</h1>
+      </div>
+      <div class="col-md-12 info">
+        <h3>Click on add a note to add notes to article and see past notes</h3>
+      </div>
     </div>
   </div>
   <div class="col-md-12">
@@ -33,4 +38,4 @@
 </div>
 
 <!--Clicked Notes Modal-->
-{{#each article}} {{> notes-modal }} {{/each}}
+{{#each article}} {{> notesModals }} {{/each}}

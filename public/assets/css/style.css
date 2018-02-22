@@ -31,6 +31,16 @@ a {
   background: rgba(128, 128, 128, 0.75);
 }
 
+.info {
+  width: 100%;
+  text-align: center;
+  color: rgb(20, 20, 142);
+}
+
+.info h3 {
+  text-align: center;
+}
+
 .deleteNote {
   display: inline-block;
 }
@@ -49,4 +59,8 @@ a {
   color: #fff;
   padding: 1rem;
   margin: 5px 0;
+  overflow-wrap: normal !important;
+}
+
+.modal-body {
 }
